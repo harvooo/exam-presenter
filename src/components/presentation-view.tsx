@@ -71,10 +71,12 @@ export function PresentationView({ data, onExit }: PresentationViewProps) {
                 </CardHeader>
                 <CardContent className="pt-6 space-y-4">
                   <div className="text-5xl font-bold text-primary">
+                    <p className="text-sm text-muted-foreground">Component Title</p>
                     <p>{data.componentTitle}</p>
                   </div>
                   <Separator className="bg-primary/20" />
                   <div className="text-5xl font-bold text-primary">
+                    <p className="text-sm text-muted-foreground">Qualification</p>
                     <p>{data.qualification}</p>
                   </div>
                   <Separator className="bg-primary/20" />
