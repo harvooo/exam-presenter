@@ -23,14 +23,16 @@ function parseTimeToDate(timeString: string): Date {
 export function PresentationView({ data, onExit }: PresentationViewProps) {
   const [now, setNow] = useState(new Date());
 
-  const { startTime, endTime } = useMemo(() => {
+  const { startTime, finishTime, finalFinishTime } = useMemo(() => {
     const start = parseTimeToDate(data.startTime);
+    const end = parseTimeToDate(data.endTime);
     const endWithExtra = parseTimeToDate(data.endTime);
     endWithExtra.setMinutes(endWithExtra.getMinutes() + (data.extraTime || 0));
     
     return {
       startTime: start,
-      endTime: endWithExtra,
+      finishTime: end,
+      finalFinishTime: endWithExtra,
     };
   }, [data]);
 
@@ -63,7 +65,7 @@ export function PresentationView({ data, onExit }: PresentationViewProps) {
       </header>
       
       <main className="flex-grow flex flex-col justify-center items-center gap-16">
-        <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-12">
             <Card>
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
                     <CardTitle className="text-xl font-medium">Component Details</CardTitle>
@@ -98,8 +100,10 @@ export function PresentationView({ data, onExit }: PresentationViewProps) {
                 </CardHeader>
                 <CardContent className="text-5xl font-bold space-y-6 pt-6">
                     <div className="flex justify-between"><span>Start Time</span> <span>{formatTime(startTime)}</span></div>
-                    <div className="flex justify-between"><span>Finish Time</span> <span>{formatTime(endTime)}</span></div>
-                    <div className="flex justify-between"><span>Extra Time</span> <span>{data.extraTime || 0} mins</span></div>
+                    <div className="flex justify-between"><span>Finish Time</span> <span>{formatTime(finishTime)}</span></div>
+                    {data.extraTime > 0 && (
+                      <div className="flex justify-between"><span>Finish Time (with extra time)</span> <span>{formatTime(finalFinishTime)}</span></div>
+                    )}
                 </CardContent>
             </Card>
         </div>
