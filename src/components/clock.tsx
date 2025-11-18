@@ -8,11 +8,11 @@ export function Clock() {
   useEffect(() => {
     const updateClock = () => {
       const now = new Date();
-      setTime(now.toLocaleTimeString('en-US', {
+      setTime(now.toLocaleTimeString('en-GB', {
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit',
-        hour12: true,
+        hour12: false,
       }));
     };
     
@@ -24,7 +24,7 @@ export function Clock() {
 
   return (
     <div className="font-mono text-5xl md:text-7xl lg:text-8xl tracking-tight">
-      {time || '00:00:00 PM'}
+      {time || '00:00:00'}
     </div>
   );
 }
