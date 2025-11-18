@@ -26,7 +26,7 @@ export function PresentationView({ data, onExit }: PresentationViewProps) {
   const { startTime, finishTime, finalFinishTime } = useMemo(() => {
     const start = parseTimeToDate(data.startTime);
     const end = parseTimeToDate(data.endTime);
-    const endWithExtra = parseTimeToDate(data.endTime);
+    const endWithExtra = new Date(end.getTime());
     endWithExtra.setMinutes(endWithExtra.getMinutes() + (data.extraTime || 0));
     
     return {
@@ -65,44 +65,44 @@ export function PresentationView({ data, onExit }: PresentationViewProps) {
       </header>
       
       <main className="flex-grow flex flex-col justify-center items-center gap-16">
-        <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-12">
             <Card>
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
-                    <CardTitle className="text-xl font-medium">Component Details</CardTitle>
-                    <Info className="h-5 w-5 text-muted-foreground" />
+                    <CardTitle className="text-2xl font-medium">Component Details</CardTitle>
+                    <Info className="h-6 w-6 text-muted-foreground" />
                 </CardHeader>
                 <CardContent className="pt-6 space-y-4">
                   <div className="text-5xl font-bold text-primary">
-                    <p className="text-sm text-muted-foreground">Component Title</p>
+                    <p className="text-lg text-muted-foreground">Component Title</p>
                     <p>{data.componentTitle}</p>
                   </div>
                   <Separator className="bg-primary/20" />
                   <div className="text-5xl font-bold text-primary">
-                    <p className="text-sm text-muted-foreground">Qualification</p>
+                    <p className="text-lg text-muted-foreground">Qualification</p>
                     <p>{data.qualification}</p>
                   </div>
                   <Separator className="bg-primary/20" />
                   <div className="text-5xl font-bold text-primary">
-                    <p className="text-sm text-muted-foreground">Component Code</p>
+                    <p className="text-lg text-muted-foreground">Component Code</p>
                     <p>{data.componentCode}</p>
                   </div>
                    <Separator className="bg-primary/20" />
                   <div className="text-5xl font-bold text-primary">
-                    <p className="text-sm text-muted-foreground">Centre Number</p>
+                    <p className="text-lg text-muted-foreground">Centre Number</p>
                     <p>{data.centreNumber}</p>
                   </div>
                 </CardContent>
             </Card>
             <Card>
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
-                    <CardTitle className="text-xl font-medium">Exam Timings</CardTitle>
-                    <ClockIcon className="h-5 w-5 text-muted-foreground" />
+                    <CardTitle className="text-2xl font-medium">Exam Timings</CardTitle>
+                    <ClockIcon className="h-6 w-6 text-muted-foreground" />
                 </CardHeader>
                 <CardContent className="text-5xl font-bold space-y-6 pt-6">
                     <div className="flex justify-between"><span>Start Time</span> <span>{formatTime(startTime)}</span></div>
                     <div className="flex justify-between"><span>Finish Time</span> <span>{formatTime(finishTime)}</span></div>
                     {data.extraTime > 0 && (
-                      <div className="flex justify-between"><span>Finish Time (with extra time)</span> <span>{formatTime(finalFinishTime)}</span></div>
+                      <div className="flex justify-between"><span>Extra Time</span> <span>{formatTime(finalFinishTime)}</span></div>
                     )}
                 </CardContent>
             </Card>
