@@ -66,7 +66,7 @@ export function PresentationView({ data, onExit }: PresentationViewProps) {
       
       <main className="flex-grow flex flex-col justify-center items-center gap-16">
         <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-12">
-            <Card>
+            <Card className="w-full">
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
                     <CardTitle className="text-2xl font-medium">Component Details</CardTitle>
                     <Info className="h-6 w-6 text-muted-foreground" />
@@ -93,17 +93,30 @@ export function PresentationView({ data, onExit }: PresentationViewProps) {
                   </div>
                 </CardContent>
             </Card>
-            <Card>
+            <Card className="w-full">
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
                     <CardTitle className="text-2xl font-medium">Exam Timings</CardTitle>
                     <ClockIcon className="h-6 w-6 text-muted-foreground" />
                 </CardHeader>
-                <CardContent className="text-5xl font-bold space-y-6 pt-6">
-                    <div className="flex justify-between"><span>Start Time</span> <span>{formatTime(startTime)}</span></div>
-                    <div className="flex justify-between"><span>Finish Time</span> <span>{formatTime(finishTime)}</span></div>
-                    {data.extraTime > 0 && (
-                      <div className="flex justify-between"><span>Extra Time</span> <span>{formatTime(finalFinishTime)}</span></div>
-                    )}
+                <CardContent className="pt-6 space-y-4">
+                  <div className="text-5xl font-bold text-primary">
+                    <p className="text-lg text-muted-foreground">Start Time</p>
+                    <p>{formatTime(startTime)}</p>
+                  </div>
+                  <Separator className="bg-primary/20" />
+                  <div className="text-5xl font-bold text-primary">
+                    <p className="text-lg text-muted-foreground">Finish Time</p>
+                    <p>{formatTime(finishTime)}</p>
+                  </div>
+                  {data.extraTime > 0 && (
+                    <>
+                      <Separator className="bg-primary/20" />
+                      <div className="text-5xl font-bold text-primary">
+                        <p className="text-lg text-muted-foreground">Extra Time</p>
+                        <p>{formatTime(finalFinishTime)}</p>
+                      </div>
+                    </>
+                  )}
                 </CardContent>
             </Card>
         </div>
