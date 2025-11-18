@@ -1,4 +1,4 @@
-export interface PresentationData {
+export interface ExamData {
   qualification: string;
   componentCode: string;
   componentTitle: string;
@@ -7,3 +7,5 @@ export interface PresentationData {
   endTime: string;
   extraTime: number;
 }
+
+export type PresentationData = ExamData[];
