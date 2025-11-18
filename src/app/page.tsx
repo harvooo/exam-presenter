@@ -1,3 +1,183 @@
+"use client";
+
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import type { PresentationData } from '@/lib/types';
+import { PresentationView } from '@/components/presentation-view';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Toaster } from '@/components/ui/toaster';
+import { useToast } from '@/hooks/use-toast';
+import { Presentation } from 'lucide-react';
+
+const formSchema = z.object({
+  qualification: z.string().min(1, 'Qualification is required.'),
+  componentCode: z.string().min(1, 'Component Code is required.'),
+  componentTitle: z.string().min(1, 'Component Title is required.'),
+  startTime: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, 'Please use HH:MM format.'),
+  endTime: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, 'Please use HH:MM format.'),
+  extraTime: z.coerce.number().int().min(0, 'Must be a positive number.').optional().default(0),
+});
+
 export default function Home() {
-  return <></>;
+  const [presentationData, setPresentationData] = useState<PresentationData | null>(null);
+  const { toast } = useToast();
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      qualification: 'GCSE',
+      componentCode: 'GMC11',
+      componentTitle: 'English Unit 4',
+      startTime: '09:00',
+      endTime: '10:30',
+      extraTime: 0,
+    },
+  });
+
+  async function handleStart(values: z.infer<typeof formSchema>) {
+    try {
+      await document.documentElement.requestFullscreen();
+      setPresentationData(values);
+    } catch (err) {
+      toast({
+        variant: "destructive",
+        title: "Fullscreen Error",
+        description: "Could not enter fullscreen mode. Please ensure your browser allows it.",
+      });
+      console.error(err);
+    }
+  }
+
+  async function handleExit() {
+    try {
+      if (document.fullscreenElement) {
+        await document.exitFullscreen();
+      }
+    } catch (err) {
+      console.error("Could not exit fullscreen", err);
+    } finally {
+      setPresentationData(null);
+    }
+  }
+  
+  if (presentationData) {
+    return <PresentationView data={presentationData} onExit={handleExit} />;
+  }
+
+  return (
+    <>
+      <main className="min-h-screen w-full flex items-center justify-center bg-background p-4">
+        <Card className="w-full max-w-2xl shadow-2xl">
+          <CardHeader>
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-primary rounded-md">
+                 <Presentation className="h-6 w-6 text-primary-foreground" />
+              </div>
+              <div>
+                <CardTitle className="text-3xl font-bold tracking-tight">Presentation Pro</CardTitle>
+                <CardDescription>Setup your presentation details below.</CardDescription>
+              </div>
+            </div>
+          </CardHeader>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(handleStart)}>
+              <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <FormField
+                  control={form.control}
+                  name="qualification"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Qualification</FormLabel>
+                      <FormControl>
+                        <Input placeholder="e.g., A-Level" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="componentCode"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Component Code</FormLabel>
+                      <FormControl>
+                        <Input placeholder="e.g., CHM12" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <div className="md:col-span-2">
+                  <FormField
+                    control={form.control}
+                    name="componentTitle"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Component Title</FormLabel>
+                        <FormControl>
+                          <Input placeholder="e.g., Advanced Organic Chemistry" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <FormField
+                  control={form.control}
+                  name="startTime"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Start Time</FormLabel>
+                      <FormControl>
+                        <Input type="time" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="endTime"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>End Time</FormLabel>
+                      <FormControl>
+                        <Input type="time" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="extraTime"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Extra Time (minutes)</FormLabel>
+                      <FormControl>
+                        <Input type="number" min="0" step="1" placeholder="e.g., 15" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </CardContent>
+              <CardFooter className="flex justify-end">
+                <Button type="submit" size="lg">
+                  Start Presentation
+                </Button>
+              </CardFooter>
+            </form>
+          </Form>
+        </Card>
+      </main>
+      <Toaster />
+    </>
+  );
 }
