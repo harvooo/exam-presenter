@@ -69,9 +69,10 @@ export function PresentationView({ data, onExit }: PresentationViewProps) {
                     <Info className="h-5 w-5 text-muted-foreground" />
                 </CardHeader>
                 <CardContent className="space-y-4 pt-4">
-                  <h2 className="text-3xl font-bold text-primary">{data.componentTitle}</h2>
-                  <p className="text-xl text-muted-foreground">{data.qualification}</p>
-                  <p className="text-xl text-muted-foreground">{data.componentCode}</p>
+                  <p className="text-3xl font-bold text-primary">{data.componentTitle}</p>
+                  <p className="text-3xl font-bold text-primary">{data.qualification}</p>
+                  <p className="text-3xl font-bold text-primary">Component Code: {data.componentCode}</p>
+                  <p className="text-3xl font-bold text-primary">Centre Number: {data.centreNumber}</p>
                 </CardContent>
             </Card>
             <Card>

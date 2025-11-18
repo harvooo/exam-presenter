@@ -18,6 +18,7 @@ const formSchema = z.object({
   qualification: z.string().min(1, 'Qualification is required.'),
   componentCode: z.string().min(1, 'Component Code is required.'),
   componentTitle: z.string().min(1, 'Component Title is required.'),
+  centreNumber: z.string().min(1, 'Centre Number is required.'),
   startTime: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, 'Please use HH:MM format.'),
   endTime: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, 'Please use HH:MM format.'),
   extraTime: z.coerce.number().int().min(0, 'Must be a positive number.').optional().default(0),
@@ -33,6 +34,7 @@ export default function Home() {
       qualification: 'GCSE',
       componentCode: 'GMC11',
       componentTitle: 'English Unit 4',
+      centreNumber: '12345',
       startTime: '09:00',
       endTime: '10:30',
       extraTime: 0,
@@ -113,21 +115,32 @@ export default function Home() {
                     </FormItem>
                   )}
                 />
-                <div className="md:col-span-2">
-                  <FormField
-                    control={form.control}
-                    name="componentTitle"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Component Title</FormLabel>
-                        <FormControl>
-                          <Input placeholder="e.g., Advanced Organic Chemistry" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
+                <FormField
+                  control={form.control}
+                  name="componentTitle"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Component Title</FormLabel>
+                      <FormControl>
+                        <Input placeholder="e.g., Advanced Organic Chemistry" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                 <FormField
+                  control={form.control}
+                  name="centreNumber"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Centre Number</FormLabel>
+                      <FormControl>
+                        <Input placeholder="e.g., 12345" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                 <FormField
                   control={form.control}
                   name="startTime"
@@ -154,19 +167,21 @@ export default function Home() {
                     </FormItem>
                   )}
                 />
-                <FormField
-                  control={form.control}
-                  name="extraTime"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Extra Time (minutes)</FormLabel>
-                      <FormControl>
-                        <Input type="number" min="0" step="1" placeholder="e.g., 15" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                <div className="md:col-span-2">
+                  <FormField
+                    control={form.control}
+                    name="extraTime"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Extra Time (minutes)</FormLabel>
+                        <FormControl>
+                          <Input type="number" min="0" step="1" placeholder="e.g., 15" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
               </CardContent>
               <CardFooter className="flex justify-end">
                 <Button type="submit" size="lg">
