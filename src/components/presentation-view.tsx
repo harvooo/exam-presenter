@@ -5,6 +5,7 @@ import { useEffect, useState, useMemo } from 'react';
 import { Clock } from '@/components/clock';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Separator } from "@/components/ui/separator";
 import { X, Clock as ClockIcon, Info } from 'lucide-react';
 
 interface PresentationViewProps {
@@ -68,11 +69,24 @@ export function PresentationView({ data, onExit }: PresentationViewProps) {
                     <CardTitle className="text-xl font-medium">Component Details</CardTitle>
                     <Info className="h-5 w-5 text-muted-foreground" />
                 </CardHeader>
-                <CardContent className="space-y-6 pt-6">
-                  <p className="text-5xl font-bold text-primary">{data.componentTitle}</p>
-                  <p className="text-5xl font-bold text-primary">{data.qualification}</p>
-                  <p className="text-5xl font-bold text-primary">Component Code: {data.componentCode}</p>
-                  <p className="text-5xl font-bold text-primary">Centre Number: {data.centreNumber}</p>
+                <CardContent className="pt-6 space-y-4">
+                  <div className="text-5xl font-bold text-primary">
+                    <p>{data.componentTitle}</p>
+                  </div>
+                  <Separator className="bg-primary/20" />
+                  <div className="text-5xl font-bold text-primary">
+                    <p>{data.qualification}</p>
+                  </div>
+                  <Separator className="bg-primary/20" />
+                  <div className="text-5xl font-bold text-primary">
+                    <p className="text-sm text-muted-foreground">Component Code</p>
+                    <p>{data.componentCode}</p>
+                  </div>
+                   <Separator className="bg-primary/20" />
+                  <div className="text-5xl font-bold text-primary">
+                    <p className="text-sm text-muted-foreground">Centre Number</p>
+                    <p>{data.centreNumber}</p>
+                  </div>
                 </CardContent>
             </Card>
             <Card>
@@ -80,10 +94,10 @@ export function PresentationView({ data, onExit }: PresentationViewProps) {
                     <CardTitle className="text-xl font-medium">Exam Timings</CardTitle>
                     <ClockIcon className="h-5 w-5 text-muted-foreground" />
                 </CardHeader>
-                <CardContent className="text-4xl font-bold space-y-6 pt-6">
-                    <div className="flex justify-between"><span>Start Time:</span> <span>{formatTime(startTime)}</span></div>
-                    <div className="flex justify-between"><span>Finish Time:</span> <span>{formatTime(endTime)}</span></div>
-                    <div className="flex justify-between"><span>Extra Time:</span> <span>{data.extraTime || 0} mins</span></div>
+                <CardContent className="text-5xl font-bold space-y-6 pt-6">
+                    <div className="flex justify-between"><span>Start Time</span> <span>{formatTime(startTime)}</span></div>
+                    <div className="flex justify-between"><span>Finish Time</span> <span>{formatTime(endTime)}</span></div>
+                    <div className="flex justify-between"><span>Extra Time</span> <span>{data.extraTime || 0} mins</span></div>
                 </CardContent>
             </Card>
         </div>
