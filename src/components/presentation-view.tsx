@@ -61,26 +61,26 @@ export function PresentationView({ data, onExit }: PresentationViewProps) {
         </Button>
       </header>
       
-      <main className="flex-grow flex flex-col justify-center items-center gap-12">
-        <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8">
+      <main className="flex-grow flex flex-col justify-center items-center gap-16">
+        <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-12">
             <Card>
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
-                    <CardTitle className="text-lg font-medium">Component Details</CardTitle>
+                    <CardTitle className="text-xl font-medium">Component Details</CardTitle>
                     <Info className="h-5 w-5 text-muted-foreground" />
                 </CardHeader>
-                <CardContent className="space-y-4 pt-4">
-                  <p className="text-3xl font-bold text-primary">{data.componentTitle}</p>
-                  <p className="text-3xl font-bold text-primary">{data.qualification}</p>
-                  <p className="text-3xl font-bold text-primary">Component Code: {data.componentCode}</p>
-                  <p className="text-3xl font-bold text-primary">Centre Number: {data.centreNumber}</p>
+                <CardContent className="space-y-6 pt-6">
+                  <p className="text-5xl font-bold text-primary">{data.componentTitle}</p>
+                  <p className="text-5xl font-bold text-primary">{data.qualification}</p>
+                  <p className="text-5xl font-bold text-primary">Component Code: {data.componentCode}</p>
+                  <p className="text-5xl font-bold text-primary">Centre Number: {data.centreNumber}</p>
                 </CardContent>
             </Card>
             <Card>
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
-                    <CardTitle className="text-lg font-medium">Exam Timings</CardTitle>
+                    <CardTitle className="text-xl font-medium">Exam Timings</CardTitle>
                     <ClockIcon className="h-5 w-5 text-muted-foreground" />
                 </CardHeader>
-                <CardContent className="text-2xl font-bold space-y-4 pt-4">
+                <CardContent className="text-4xl font-bold space-y-6 pt-6">
                     <div className="flex justify-between"><span>Start Time:</span> <span>{formatTime(startTime)}</span></div>
                     <div className="flex justify-between"><span>Finish Time:</span> <span>{formatTime(endTime)}</span></div>
                     <div className="flex justify-between"><span>Extra Time:</span> <span>{data.extraTime || 0} mins</span></div>
