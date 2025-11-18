@@ -60,7 +60,7 @@ export function PresentationView({ data, onExit }: PresentationViewProps) {
     <div className="fixed inset-0 bg-background text-foreground flex flex-col p-8 md:p-12 lg:p-16 animate-in fade-in duration-500">
       <header className="flex justify-end items-start">
         <Button variant="ghost" size="icon" onClick={onExit} aria-label="Exit Presentation">
-          <X className="h-8 w-8" />
+          <X className="h-10 w-10" />
         </Button>
       </header>
       
@@ -68,51 +68,51 @@ export function PresentationView({ data, onExit }: PresentationViewProps) {
         <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-12">
             <Card className="w-full">
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
-                    <CardTitle className="text-2xl font-medium">Component Details</CardTitle>
-                    <Info className="h-6 w-6 text-muted-foreground" />
+                    <CardTitle className="text-4xl font-medium">Component Details</CardTitle>
+                    <Info className="h-8 w-8 text-muted-foreground" />
                 </CardHeader>
                 <CardContent className="pt-6 space-y-4">
-                  <div className="text-5xl font-bold text-primary">
-                    <p className="text-lg text-muted-foreground">Component Title</p>
+                  <div className="text-7xl font-bold text-primary">
+                    <p className="text-2xl text-muted-foreground">Component Title</p>
                     <p>{data.componentTitle}</p>
                   </div>
                   <Separator className="bg-primary/20" />
-                  <div className="text-5xl font-bold text-primary">
-                    <p className="text-lg text-muted-foreground">Qualification</p>
+                  <div className="text-7xl font-bold text-primary">
+                    <p className="text-2xl text-muted-foreground">Qualification</p>
                     <p>{data.qualification}</p>
                   </div>
                   <Separator className="bg-primary/20" />
-                  <div className="text-5xl font-bold text-primary">
-                    <p className="text-lg text-muted-foreground">Component Code</p>
+                  <div className="text-7xl font-bold text-primary">
+                    <p className="text-2xl text-muted-foreground">Component Code</p>
                     <p>{data.componentCode}</p>
                   </div>
                    <Separator className="bg-primary/20" />
-                  <div className="text-5xl font-bold text-primary">
-                    <p className="text-lg text-muted-foreground">Centre Number</p>
+                  <div className="text-7xl font-bold text-primary">
+                    <p className="text-2xl text-muted-foreground">Centre Number</p>
                     <p>{data.centreNumber}</p>
                   </div>
                 </CardContent>
             </Card>
             <Card className="w-full">
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
-                    <CardTitle className="text-2xl font-medium">Exam Timings</CardTitle>
-                    <ClockIcon className="h-6 w-6 text-muted-foreground" />
+                    <CardTitle className="text-4xl font-medium">Exam Timings</CardTitle>
+                    <ClockIcon className="h-8 w-8 text-muted-foreground" />
                 </CardHeader>
                 <CardContent className="pt-6 space-y-4">
-                  <div className="text-5xl font-bold text-primary">
-                    <p className="text-lg text-muted-foreground">Start Time</p>
+                  <div className="text-7xl font-bold text-primary">
+                    <p className="text-2xl text-muted-foreground">Start Time</p>
                     <p>{formatTime(startTime)}</p>
                   </div>
                   <Separator className="bg-primary/20" />
-                  <div className="text-5xl font-bold text-primary">
-                    <p className="text-lg text-muted-foreground">Finish Time</p>
+                  <div className="text-7xl font-bold text-primary">
+                    <p className="text-2xl text-muted-foreground">Finish Time</p>
                     <p>{formatTime(finishTime)}</p>
                   </div>
                   {data.extraTime > 0 && (
                     <>
                       <Separator className="bg-primary/20" />
-                      <div className="text-5xl font-bold text-primary">
-                        <p className="text-lg text-muted-foreground">Extra Time</p>
+                      <div className="text-7xl font-bold text-primary">
+                        <p className="text-2xl text-muted-foreground">Extra Time</p>
                         <p>{formatTime(finalFinishTime)}</p>
                       </div>
                     </>

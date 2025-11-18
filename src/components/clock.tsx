@@ -23,7 +23,7 @@ export function Clock() {
   }, []);
 
   return (
-    <div className="font-mono text-5xl md:text-7xl lg:text-8xl tracking-tight">
+    <div className="font-mono text-6xl md:text-8xl lg:text-9xl tracking-tight">
       {time || '00:00:00'}
     </div>
   );
