@@ -1,3 +1,3 @@
 # Exam Presenter
 
-This is a firebase project written with JS React by Gemini
+This is a firebase project written with TS React by Gemini
